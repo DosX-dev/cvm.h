@@ -46,7 +46,7 @@ Github: https://github.com/ac3s0r/cvm.h
                         (char)((x >> 48) & 0xff), \
                         (char)((x >> 56) & 0xff)
 
-#define ALLOCSTRUCT(x) (struct x *)malloc(sizeof(struct x));
+#define ALLOCSTRUCT(x) (struct x *)malloc(sizeof(struct x))
 #define JOINBITS(x, y) ((0b00001111 & x) | (y << 4))
 #define GETFIRST(x) (x & 0b00001111)
 #define GETSECOND(x) ((x >> 4) & 0b00001111)
