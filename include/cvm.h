@@ -270,7 +270,13 @@ static void vm_eval(struct vm_context *ctx, char *instr) {
 
                 word args_count = GETFIRST(instr[2]);
                 void *ptrs[16];
-                memset(&ptrs, 0, sizeof(ptrs) / sizeof(ptrs[0]));
+                const size_t max_args = sizeof(ptrs) / sizeof(ptrs[0]);
+                if (args_count < 0) {
+                    args_count = 0;
+                } else if ((size_t)args_count > max_args) {
+                    args_count = (word)max_args;
+                }
+                memset(ptrs, 0, sizeof(ptrs));
                 for (int i = 0; i < args_count; i++) {
                     ptrs[i] = (void *)vm_pop(ctx);
                 }
